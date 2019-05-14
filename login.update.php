@@ -2,6 +2,18 @@
 require "db.php";
 include "functions.php";
 
+if(isset($_POST['submit'])){
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$id = $_POST['id'];
+	$query = "UPDATE users SET username = '$username', password = '$password' WHERE id = '$id' ";
+	$result = mysqli_query($connection,$query);
+
+	if(!$result){
+		die("query failed" . mysqli_error());
+	}
+
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,7 +26,7 @@ include "functions.php";
 <div class="container col-lg-6 mx-auto border border-success rounded-lg">
 		<h1>Update</h1>
 		<div class="col-xs-6">
-			<form method="post" action="login-update.php">
+			<form method="post" action="login.update.php">
 				<div class="form-group">
 					<label>Username:</label>
 					<input type="text" name="username" class="form-control">
@@ -23,7 +35,7 @@ include "functions.php";
 					<label>Password:</label>
 					<input type="password" name="password" class="form-control">								
 				</div>
-				<select name="" id="">
+				<select name="id" id="">
 					<?php showData();?>
 				</select> <br>
 
